@@ -1,0 +1,54 @@
+Usage: python hsslcm.py -m [LCMMODE] -i [FINENAME]
+
+
+Commands:
+  deploy                       Include download package, generate netconf/helm values/secret.tar/ss7 link, onboard image/charts, upload netconf/secret, SS7 Link/License to ZTS, deploy HSS CNF and health check.
+  deploy_only                  Include upload netconf&secrets to ZTS, deploy HSS CNF and health check.
+  prepare_all                  Include download package, generate netconf/helm values/secret.tar/upload ss7 link&license.
+  prepare_all_without_download Include generate netconf/helm values/secret.tar/upload ss7 link&license.
+  onboard_images_charts        Include onboarding images and helm charts.
+  prepare_netconf              Auto generate netconf xml base on configure file.
+  prepare_helm_values          Auto generate helm values base on configure file.
+  prepare_ss7_link             Auto generate ss7 link with SIGP IP and LPC IP.
+  health_check                 Check the HSS CNF health state.
+  terminate                    Terminate HSS CNF.
+  cleanup_image_charts         Clean the image and charts of HSS CNF.
+
+
+For example:
+    /usr/bin/python3 hsslcm.py -m deploy -i cnfdeployment.cfg -y valuesYamlTemplate.yaml
+
+Note:
+1. install_chart_list,only support R22.0,R22.2....
+For R22.0, chart_list=nreg-hss-hlr-cluster,nreg-hss-hlr-cluster-security,nreg-hss-hlr-network,dco,hssxds,etcd,nreg-hss-hlr
+
+2. helm_release_name
+Please keep the order of helm_release_name same with chart_list
+
+3. terminate_release_name
+The terminate order for helm chart, inverted order with chart_list
+User can feel free to edit the terminate helm chart list to specify which chart will be terminated and others left there.
+
+4. casecret will auto deleted after lab uninstall, if not, the cmserver will not deleted, you need do it by yourself.
+5. the cnsba part about values.yaml auto generated not supported.
+6. image clean about cnsba and new added image in future not supported.
+7. vnc run maybe better, or update ssh keepalive
+
+Python environment
+When hsslcm.py throw like error “no import module yaml”, please use like pip3.6 install pyyaml to install these needed package.
+When the connection failed to access python package, please set below proxy:
+export http_proxy=http://93.183.14.14:8080
+
+export ftp_proxy=http://93.183.14.14:8080
+
+export all_proxy=socks://93.183.14.14:8080/
+
+export https_proxy=http://93.183.14.14:8080
+
+example:
+pip3.6 install pexpect --proxy http://135.245.192.7:8000 
+pip3.6 install setuptools_rust --proxy http://135.245.192.7:8000 
+pip3.6 install --upgrade pip --proxy http://135.245.192.7:8000
+pip3.6 install paramiko --proxy http://135.245.192.7:8000
+
+

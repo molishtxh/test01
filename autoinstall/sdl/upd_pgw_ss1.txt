@@ -1,0 +1,5 @@
+jsonfile::./SS/secret_pgw.json
+NeType::PGW
+applicationName::pgwsecrets
+vnfmapiuser::QN%Sn8jn
+bulk-sftp-default::QN%Sn8jn

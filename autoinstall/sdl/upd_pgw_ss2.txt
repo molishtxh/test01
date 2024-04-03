@@ -1,0 +1,5 @@
+jsonfile::./SS/secret_pgw.json
+NeType::PGW
+applicationName::SPMLProvCerts
+PGWProvPrivateKey::/tmp/server.key
+PGWProvCertificate::/tmp/server.cert

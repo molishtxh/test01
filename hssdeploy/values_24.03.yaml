@@ -1,0 +1,1563 @@
+global:
+  deploymentMode: default
+  timeZoneEnv: ''
+  repository: bcmt-registry:5000
+  useAffinity: true
+  enableAwsIpMgmt: false
+  timezoneHostMount: true
+  cni: multus
+  image:
+    udmenvoy:
+      tag: IMSDL24030133
+    oam:
+      tag: IMSDL24030133
+    fbit:
+      tag: IMSDL24030133
+    exporter:
+      tag: IMSDL24030133
+    awsipmgmt:
+      tag: IMSDL24030133
+    cnsbasidecar:
+      tag: 24.3.3
+  pvcStorageClass: 'csi-cephrbd'
+  enableInternalIPv6: false
+  enableInterPodTLSCom: false
+  enableSysPtraceCap: false
+  aifEnabled: true
+  environment:
+    vnfid: 'qdlab1'
+    releasevalue: '1'
+    relvervalue: 24.3.0
+    ztsnamespace: 'zts'
+  featureflag:
+    groupHandlingEnabled: false
+    nsrExtensionEnabled: false
+    wcImpuCapIncreaseEnabled: false
+    optimizeUmstpNumPerCallp: false
+    enableLivenessHttpProbe: true
+    enableReadinessHttpProbe: true
+    enableRoamingAreaVplmnIdExtend: false
+    enableCxRDSPHeapSizeIncrease: false
+    useTuningCniForSysctl: false
+    enableAutoClearDeadPodAlarms: true
+    updateAlarmCategoryInNetAct: true
+  security:
+    customPodSecurityContext:
+      enabled: false
+      userid: 2000
+      fsgroupid: 2000
+    networkFirewall:
+      enabled: false
+  healthCheck:
+    cnfHealthCheckEnabled: false
+    cpuThreshHold: 80
+    memThreshHold: 90
+  ephemeralStorageLimits:
+    enabled: false
+    maxContainerLogSizeMi: 300
+  podNamePrefix: ''
+  containerNamePrefix: ''
+  labels: {}
+  cnsba:
+    enabled: true
+    enableNrfCache: true
+    crdbHost: qdlab1-db-crdb-redisio.default.svc.cluster.local
+    crdbSecret: qdlab1-db-crdb-redisio-creds-default
+  clusterResources:
+    securityContext:
+      enabled: false
+      userSecPolicy:
+        rule: MustRunAs
+        rangeMin: 1024
+        rangeMax: 65535
+      fsGroupSecPolicy:
+        rule: MustRunAs
+        rangeMin: 1024
+        rangeMax: 65535
+    priorityClass:
+      define: true
+      use: true
+    psp:
+      define: false
+    scc:
+      define: false
+      resourceNames:
+        dlb: ''
+        hlrcallp: ''
+        ss7: ''
+        nreg: ''
+    opa:
+      define: true
+    useSecurityPolicyType: opa
+  net-helm-chart-4G:
+    ldapLan:
+      enabled: false
+      ipv6Enabled: false
+    ldaplbLan:
+      enabled: true
+      ipv6Enabled: false
+    vnflbLan:
+      enabled: false
+      ipv6Enabled: false
+    diam1Lan:
+      enabled: true
+      ipv6Enabled: false
+    triggerLan:
+      enabled: true
+      ipv6Enabled: false
+    acreencryptLan:
+      enabled: true
+      ipv6Enabled: false
+    http2lbLan:
+      enabled: true
+      ipv6Enabled: false
+    liLan:
+      enabled: true
+      ipv6Enabled: false
+    hsm1Lan:
+      enabled: true
+      ipv6Enabled: false
+    hsm2Lan:
+      enabled: true
+      ipv6Enabled: false
+    diam2Lan:
+      enabled: true
+      ipv6Enabled: false
+    diammh1Lan:
+      enabled: false
+      ipv6Enabled: false
+    diammh2Lan:
+      enabled: false
+      ipv6Enabled: false
+    sigpLanhlr:
+      enabled: true
+      ipv6Enabled: false
+    sigsLanhlr:
+      enabled: true
+      ipv6Enabled: false
+    InterCE1Lanhlr:
+      enabled: true
+      ipv6Enabled: false
+    InterCE2Lanhlr:
+      enabled: true
+      ipv6Enabled: false
+    InterCE3Lanhlr:
+      enabled: true
+      ipv6Enabled: false
+  arpf:
+    enabled: true
+  dlb:
+    enabled: true
+    enableInternalHd: true
+    enableTlsOnInternalHd: false
+  http2lb:
+    enabled: true
+    connections:
+    - entry_name: Http2lb1
+      http2lbLan: 10.255.68.137/24
+    - entry_name: Http2lb2
+      http2lbLan: 10.255.68.138/24
+    ingress:
+      plaintext:
+        listenPort: 8080
+        name: externalIngress
+        statPrefix: http2ingress
+      tls:
+        listenPort: 8443
+        name: externalIngressTls
+        statPrefix: http2ingresstls
+    enableHttp2Tls: false
+    enablePlaintextWithTls: false
+    enableConnectionAlarm: false
+    monitorInterval: 60
+  ldapdisp:
+    enabled: true
+  hsscallp:
+    enabled: true
+    enableDNTFeature: 0
+  hssli:
+    enabled: true
+  trigger:
+    enabled: true
+  ss7:
+    enabled: true
+    pointcode:
+      pc: 1001
+  hlrcallp:
+    enabled: true
+    enableDNTFeature: 0
+  lcm:
+    enabled: true
+    lcmsettings:
+      loghandlerJob: disable
+  vnfclusterenvoylb:
+    enabled: true
+  hssfla:
+    enabled: false
+  clustermonitoragent:
+    enabled: true
+  dco:
+    enabled: true
+  hssxds:
+    enabled: true
+  tests:
+    enabled: true
+  etcd:
+    enabled: true
+  cnsbaController:
+    enabled: true
+  crdbRedisio:
+    enabled: true
+  debugassist:
+    enabled: true
+
+net-helm-chart-4G:
+  enabled: true
+  ldapLan:
+    hostDevice:
+    mtu: 1500
+    type: dynamic
+    cidr:
+    allocationPoolStartIp:
+    allocationPoolEndIp:
+    routes:
+    fssIntegration:
+      enabled: false
+      nodeSelector:
+      extNetworkID:
+      extNetworkName:
+      extProjectID:
+      extProjectName:
+      vlan: 1
+      hostDevice:
+  ldaplbLan:
+    hostDevice: vlan200
+    mtu: 1500
+    type: dynamic
+    cidr: 10.255.68.0/24
+    allocationPoolStartIp: 10.255.68.121
+    allocationPoolEndIp: 10.255.68.126
+    routes:
+    - dst: 10.67.30.128/26
+      gw: 10.255.68.254
+    - dst: 10.255.28.0/24
+      gw: 10.255.68.254
+    - dst: 10.255.8.0/24
+      gw: 10.255.68.254
+    - dst: 10.67.26.0/24
+      gw: 10.255.68.254
+    - dst: 10.67.28.0/24
+      gw: 10.255.68.254
+    - dst: 10.67.27.0/24
+      gw: 10.255.68.254
+    - dst: 10.9.229.0/24
+      gw: 10.255.68.254
+    fssIntegration:
+      enabled: false
+      nodeSelector:
+      extNetworkID:
+      extNetworkName:
+      extProjectID:
+      extProjectName:
+      vlan: 1
+      hostDevice:
+  vnflbLan:
+    hostDevice: vlan200
+    mtu: 1500
+    type: dynamic
+    cidr: 10.255.68.0/24
+    allocationPoolStartIp: 10.255.68.127
+    allocationPoolEndIp: 10.255.68.128
+    routes:
+    fssIntegration:
+      enabled: false
+      nodeSelector:
+      extNetworkID:
+      extNetworkName:
+      extProjectID:
+      extProjectName:
+      vlan: 1
+      hostDevice:
+  diam1Lan:
+    hostDevice: vlan200
+    mtu: 1500
+    type: static
+    cidr: 10.255.68.0/24
+    allocationPoolStartIp: 10.255.68.129
+    allocationPoolEndIp: 10.255.68.130
+    routes:
+    - dst: 10.67.27.0/24
+      gw: 10.255.68.254
+    - dst: 10.67.30.0/24
+      gw: 10.255.68.254
+    fssIntegration:
+      enabled: false
+      nodeSelector:
+      extNetworkID:
+      extNetworkName:
+      extProjectID:
+      extProjectName:
+      vlan: 1
+      hostDevice:
+  triggerLan:
+    hostDevice: vlan200
+    mtu: 1500
+    type: dynamic
+    cidr: 10.255.68.0/24
+    allocationPoolStartIp: 10.255.68.133
+    allocationPoolEndIp: 10.255.68.134
+    routes:
+    - dst: 10.67.30.128/26
+      gw: 10.255.68.254
+    - dst: 10.67.38.0/24
+      gw: 10.255.68.254
+    - dst: 10.255.28.0/24
+      gw: 10.255.68.254
+    - dst: 10.255.8.0/24
+      gw: 10.255.68.254
+    - dst: 10.67.27.0/24
+      gw: 10.255.68.254
+    - dst: 10.9.229.0/24
+      gw: 10.255.68.254
+    fssIntegration:
+      enabled: false
+      nodeSelector:
+      extNetworkID:
+      extNetworkName:
+      extProjectID:
+      extProjectName:
+      vlan: 1
+      hostDevice:
+  acreencryptLan:
+    hostDevice: vlan200
+    mtu: 1500
+    type: dynamic
+    cidr: 10.255.68.0/24
+    allocationPoolStartIp: 10.255.68.135
+    allocationPoolEndIp: 10.255.68.136
+    routes:
+    fssIntegration:
+      enabled: false
+      nodeSelector:
+      extNetworkID:
+      extNetworkName:
+      extProjectID:
+      extProjectName:
+      vlan: 1
+      hostDevice:
+  http2lbLan:
+    hostDevice: vlan200
+    mtu: 1500
+    type: dynamic
+    cidr: 10.255.68.0/24
+    allocationPoolStartIp: 10.255.68.137
+    allocationPoolEndIp: 10.255.68.138
+    routes:
+    - dst: 10.67.27.0/24
+      gw: 10.255.68.254
+    fssIntegration:
+      enabled: false
+      nodeSelector:
+      extNetworkID:
+      extNetworkName:
+      extProjectID:
+      extProjectName:
+      vlan: 1
+      hostDevice:
+  liLan:
+    hostDevice: vlan200
+    mtu: 1500
+    type: dynamic
+    cidr: 10.255.68.0/24
+    allocationPoolStartIp: 10.255.68.139
+    allocationPoolEndIp: 10.255.68.140
+    routes:
+    fssIntegration:
+      enabled: false
+      nodeSelector:
+      extNetworkID:
+      extNetworkName:
+      extProjectID:
+      extProjectName:
+      vlan: 1
+      hostDevice:
+  hsm1Lan:
+    hostDevice: vlan200
+    mtu: 1500
+    type: dynamic
+    cidr: 10.255.68.0/24
+    allocationPoolStartIp: 10.255.68.141
+    allocationPoolEndIp: 10.255.68.142
+    routes:
+    - dst: 10.67.38.0/24
+      gw: 10.255.68.254
+    - dst: 10.67.31.0/24
+      gw: 10.255.68.254
+    fssIntegration:
+      enabled: false
+      nodeSelector:
+      extNetworkID:
+      extNetworkName:
+      extProjectID:
+      extProjectName:
+      vlan: 1
+      hostDevice:
+  hsm2Lan:
+    hostDevice: vlan201
+    mtu: 1500
+    type: dynamic
+    cidr: 10.255.69.0/24
+    allocationPoolStartIp: 10.255.69.65
+    allocationPoolEndIp: 10.255.69.66
+    routes:
+    fssIntegration:
+      enabled: false
+      nodeSelector:
+      extNetworkID:
+      extNetworkName:
+      extProjectID:
+      extProjectName:
+      vlan: 1
+      hostDevice:
+  diam2Lan:
+    hostDevice: vlan201
+    mtu: 1500
+    type: static
+    cidr: 10.255.69.0/24
+    allocationPoolStartIp: 10.255.69.61
+    allocationPoolEndIp: 10.255.69.62
+    routes:
+    fssIntegration:
+      enabled: false
+      nodeSelector:
+      extNetworkID:
+      extNetworkName:
+      extProjectID:
+      extProjectName:
+      vlan: 1
+      hostDevice:
+  diammh1Lan:
+    hostDevice: vlan200
+    mtu: 1500
+    type: static
+    cidr: 10.255.68.0/24
+    allocationPoolStartIp: 10.255.68.131
+    allocationPoolEndIp: 10.255.68.132
+    routes:
+    fssIntegration:
+      enabled: false
+      nodeSelector:
+      extNetworkID:
+      extNetworkName:
+      extProjectID:
+      extProjectName:
+      vlan: 1
+      hostDevice:
+  diammh2Lan:
+    hostDevice: vlan201
+    mtu: 1500
+    type: static
+    cidr: 10.255.69.0/24
+    allocationPoolStartIp: 10.255.69.63
+    allocationPoolEndIp: 10.255.69.64
+    routes:
+    fssIntegration:
+      enabled: false
+      nodeSelector:
+      extNetworkID:
+      extNetworkName:
+      extProjectID:
+      extProjectName:
+      vlan: 1
+      hostDevice:
+  sigpLanhlr:
+    hostDevice: vlan200
+    mtu: 1500
+    type: static
+    cidr: 10.255.68.0/24
+    allocationPoolStartIp: 10.255.68.143
+    allocationPoolEndIp: 10.255.68.144
+    routes:
+    - dst: 10.67.27.0/24
+      gw: 10.255.68.254
+    - dst: 10.67.30.0/24
+      gw: 10.255.68.254
+    fssIntegration:
+      enabled: false
+      nodeSelector:
+      extNetworkID:
+      extNetworkName:
+      extProjectID:
+      extProjectName:
+      vlan: 1
+      hostDevice:
+  sigsLanhlr:
+    hostDevice: vlan201
+    mtu: 1500
+    type: static
+    cidr: 10.255.69.0/24
+    allocationPoolStartIp: 10.255.69.67
+    allocationPoolEndIp: 10.255.69.68
+    routes:
+    fssIntegration:
+      enabled: false
+      nodeSelector:
+      extNetworkID:
+      extNetworkName:
+      extProjectID:
+      extProjectName:
+      vlan: 1
+      hostDevice:
+  InterCE1Lanhlr:
+    hostDevice: vlan200
+    mtu: 1500
+    type: static
+    cidr: 10.255.68.0/24
+    allocationPoolStartIp: 10.255.68.145
+    allocationPoolEndIp: 10.255.68.146
+    routes:
+    - dst: 10.255.68.145/32
+      gw: 10.255.68.254
+    - dst: 10.255.68.146/32
+      gw: 10.255.68.254
+    fssIntegration:
+      enabled: false
+      nodeSelector:
+      extNetworkID:
+      extNetworkName:
+      extProjectID:
+      extProjectName:
+      vlan: 1
+      hostDevice:
+  InterCE2Lanhlr:
+    hostDevice: vlan200
+    mtu: 1500
+    type: static
+    cidr: 10.255.68.0/24
+    allocationPoolStartIp: 10.255.68.147
+    allocationPoolEndIp: 10.255.68.148
+    routes:
+    - dst: 10.255.68.147/32
+      gw: 10.255.68.254
+    - dst: 10.255.68.148/32
+      gw: 10.255.68.254
+    fssIntegration:
+      enabled: false
+      nodeSelector:
+      extNetworkID:
+      extNetworkName:
+      extProjectID:
+      extProjectName:
+      vlan: 1
+      hostDevice:
+  InterCE3Lanhlr:
+    hostDevice: vlan201
+    mtu: 1500
+    type: static
+    cidr: 10.255.69.0/24
+    allocationPoolStartIp: 10.255.69.69
+    allocationPoolEndIp: 10.255.69.70
+    routes:
+    - dst: 10.255.69.69/32
+      gw: 10.255.69.254
+    - dst: 10.255.69.70/32
+      gw: 10.255.69.254
+    fssIntegration:
+      enabled: false
+      nodeSelector:
+      extNetworkID:
+      extNetworkName:
+      extProjectID:
+      extProjectName:
+      vlan: 1
+      hostDevice:
+
+arpf:
+  image:
+    arpf:
+      tag: IMSDL24030133
+    softac:
+      imagename: softac-cust-std
+      tag: 3.1.3-10
+  networks:
+    hsm1Lan:
+      routes:
+      interfacename: hsm1Lan
+      networkname: hsm1lan
+    hsm2Lan:
+      routes:
+      interfacename: hsm2Lan
+      networkname: hsm2lan
+    acreencryptLan:
+      routes:
+      interfacename: triggerLan
+      networkname: acreencryptlan
+  nodeSelector:
+  - key: is_edge
+    value: 'true'
+  tolerations:
+  - effect: NoExecute
+    key: is_edge
+    operator: Equal
+    value: 'true'
+  - effect: NoExecute
+    key: node.kubernetes.io/not-ready
+    operator: Exists
+    tolerationSeconds: 0
+  - effect: NoExecute
+    key: node.kubernetes.io/unreachable
+    operator: Exists
+    tolerationSeconds: 0
+  serviceAccountName: ''
+  priorityClassName: ''
+  custom:
+    labels: {}
+  replicaCount: 1
+  podDisruptionBudgetEnabled: true
+  podDisruptionBudget: 25%
+  maxUnavailable: 25%
+  softacrepository: as-ci-docker-candidates-local.repo.lab.pl.alcatel-lucent.com
+  security:
+    networkFirewall:
+      acReencryption:
+        peers: {}
+        port:
+  kmhHttpclDeplNeeded: false
+
+dlb:
+  image:
+    dlb:
+      tag: IMSDL24030133
+  networks:
+    diam1Lan:
+      routes:
+      interfacename: diam1Lan
+      networkname: diam1lan
+    diam2Lan:
+      routes:
+      interfacename: diam2Lan
+      networkname: diam2lan
+    diammh1Lan:
+      routes:
+      interfacename: diammh1Lan
+      networkname: diammh1lan
+    diammh2Lan:
+      routes:
+      interfacename: diammh2Lan
+      networkname: diammh2lan
+    sctpAuth:
+      interfacename: dummy
+      networkname: sctpauth
+    sctpTune:
+      interfacename: dummy
+      networkname: sctptunedlb
+  nodeSelector:
+  - key: is_edge
+    value: 'true'
+  tolerations:
+  - effect: NoExecute
+    key: is_edge
+    operator: Equal
+    value: 'true'
+  - effect: NoExecute
+    key: node.kubernetes.io/not-ready
+    operator: Exists
+    tolerationSeconds: 0
+  - effect: NoExecute
+    key: node.kubernetes.io/unreachable
+    operator: Exists
+    tolerationSeconds: 0
+  serviceAccountName: ''
+  priorityClassName: ''
+  custom:
+    labels: {}
+  connections:
+  - entry_name: DLB1
+    diam1Lan: 10.255.68.129/24
+    diam2Lan: 10.255.69.61/24
+    diammh1Lan: 10.255.68.131/24
+    diammh2Lan: 10.255.69.63/24
+  - entry_name: DLB2
+    diam1Lan: 10.255.68.130/24
+    diam2Lan: 10.255.69.62/24
+    diammh1Lan: 10.255.68.132/24
+    diammh2Lan: 10.255.69.64/24
+  replicaCount: 2
+  podDisruptionBudgetEnabled: true
+  podDisruptionBudget: 25%
+  maxUnavailable: 25%
+  sctpAuth:
+    enabled: false
+  sctpTune:
+    enabled: false
+
+http2lb:
+  image:
+    http2lb:
+      tag: IMSDL24030133
+    http2lbmgmt:
+      tag: IMSDL24030133
+  networks:
+    http2lbLan:
+      routes:
+      interfacename: http2
+      networkname: http2lblan
+  nodeSelector:
+  - key: is_edge
+    value: 'true'
+  tolerations:
+  - effect: NoExecute
+    key: is_edge
+    operator: Equal
+    value: 'true'
+  - effect: NoExecute
+    key: node.kubernetes.io/not-ready
+    operator: Exists
+    tolerationSeconds: 0
+  - effect: NoExecute
+    key: node.kubernetes.io/unreachable
+    operator: Exists
+    tolerationSeconds: 0
+  serviceAccountName: ''
+  priorityClassName: ''
+  custom:
+    labels: {}
+  replicaCount: 2
+  podDisruptionBudgetEnabled: true
+  podDisruptionBudget: 25%
+  maxUnavailable: 25%
+  externalTls:
+    serverTls:
+      minTlsVersion: TLSv1_2
+      maxTlsVersion: TLSv1_2
+      cipherSuites:
+      - ECDHE-ECDSA-AES128-GCM-SHA256
+      - ECDHE-ECDSA-AES256-GCM-SHA384
+      - ECDHE-RSA-AES256-GCM-SHA384
+      ecdhCurves:
+      - P-256
+      enableCertValidation: true
+      sanValidation:
+        enabled: false
+        exactMatchSanList: []
+        regexMatchSanList: []
+    clientTls:
+      minTlsVersion: TLSv1_2
+      maxTlsVersion: TLSv1_2
+      cipherSuites:
+      - ECDHE-ECDSA-AES128-GCM-SHA256
+      - ECDHE-ECDSA-AES256-GCM-SHA384
+      - ECDHE-RSA-AES256-GCM-SHA384
+      ecdhCurves:
+      - P-256
+      enableCertValidation: true
+      sanValidation:
+        enabled: false
+        exactMatchSanList: []
+        regexMatchSanList: []
+  security:
+    networkFirewall:
+      http2lb:
+        peers: {}
+  resources:
+    flavor: medium
+
+ldapdisp:
+  image:
+    ldapdispMgnt:
+      tag: IMSDL24030133
+  networks:
+    ldaplbLan:
+      routes:
+      interfacename: ldaplbLan
+      networkname: ldaplblan
+  nodeSelector:
+  - key: is_edge
+    value: 'true'
+  tolerations:
+  - effect: NoExecute
+    key: is_edge
+    operator: Equal
+    value: 'true'
+  - effect: NoExecute
+    key: node.kubernetes.io/not-ready
+    operator: Exists
+    tolerationSeconds: 0
+  - effect: NoExecute
+    key: node.kubernetes.io/unreachable
+    operator: Exists
+    tolerationSeconds: 0
+  serviceAccountName: ''
+  priorityClassName: ''
+  custom:
+    labels: {}
+  replicaCount: 1
+  podDisruptionBudgetEnabled: true
+  podDisruptionBudget: 25%
+  maxUnavailable: 25%
+
+hsscallp:
+  image:
+    hsscallp:
+      tag: IMSDL24030133
+  networks:
+    ldapLan:
+      routes:
+      interfacename: ldapLan
+      networkname: ldaplan
+  nodeSelector:
+  - key: is_edge
+    value: 'true'
+  tolerations:
+  - effect: NoExecute
+    key: is_edge
+    operator: Equal
+    value: 'true'
+  - effect: NoExecute
+    key: node.kubernetes.io/not-ready
+    operator: Exists
+    tolerationSeconds: 0
+  - effect: NoExecute
+    key: node.kubernetes.io/unreachable
+    operator: Exists
+    tolerationSeconds: 0
+  serviceAccountName: ''
+  priorityClassName: ''
+  custom:
+    labels: {}
+  replicaCount: 1
+  podDisruptionBudgetEnabled: true
+  podDisruptionBudget: 25%
+  maxUnavailable: 25%
+  hpa:
+    minreplicas: 2
+    maxreplicas:
+    useCpu:
+      enabled: false
+      target: 60
+  enableH2P: true
+  ENABLE_SEC_LDAP_CONN_MONITOR: false
+
+hssli:
+  image:
+    hssli:
+      tag: IMSDL24030133
+  networks:
+    liLan:
+      routes:
+      interfacename: liLan
+      networkname: lilan
+  nodeSelector:
+  - key: is_edge
+    value: 'true'
+  tolerations:
+  - effect: NoExecute
+    key: is_edge
+    operator: Equal
+    value: 'true'
+  - effect: NoExecute
+    key: node.kubernetes.io/not-ready
+    operator: Exists
+    tolerationSeconds: 0
+  - effect: NoExecute
+    key: node.kubernetes.io/unreachable
+    operator: Exists
+    tolerationSeconds: 0
+  serviceAccountName: ''
+  priorityClassName: ''
+  custom:
+    labels: {}
+  replicaCount: 1
+  podDisruptionBudgetEnabled: true
+  podDisruptionBudget: 25%
+  maxUnavailable: 25%
+
+trigger:
+  image:
+    trigger:
+      tag: IMSDL24030133
+  networks:
+    triggerLan:
+      routes:
+      interfacename: triggerLan
+      networkname: triggerlan
+  nodeSelector:
+  - key: is_edge
+    value: 'true'
+  tolerations:
+  - effect: NoExecute
+    key: is_edge
+    operator: Equal
+    value: 'true'
+  - effect: NoExecute
+    key: node.kubernetes.io/not-ready
+    operator: Exists
+    tolerationSeconds: 0
+  - effect: NoExecute
+    key: node.kubernetes.io/unreachable
+    operator: Exists
+    tolerationSeconds: 0
+  serviceAccountName: ''
+  priorityClassName: ''
+  custom:
+    labels: {}
+  replicaCount: 2
+  podDisruptionBudgetEnabled: true
+  podDisruptionBudget: 25%
+  maxUnavailable: 25%
+  security:
+    networkFirewall:
+      trigger:
+        peers: {}
+        ports:
+          triggerservice:
+          triggerservicebc:
+          triggerserviceh:
+          triggerservicebch:
+          ackeyservice:
+          interfeservice:
+          canmsub:
+          canmsubh:
+          mssearch:
+          mssearchh:
+          olcm:
+          olcmh:
+          eirtrigger:
+          eirtriggerh:
+
+ss7:
+  image:
+    ss7:
+      tag: IMSDL24030133
+  networks:
+    sigpLanhlr:
+      routes:
+      interfacename: sigpLanhlr
+      networkname: sigplan-hlr
+    sigsLanhlr:
+      routes:
+      interfacename: sigsLanhlr
+      networkname: sigslan-hlr
+    InterCE1Lanhlr:
+      routes:
+      interfacename: InterCE1Lanhlr
+      networkname: interce1lan-hlr
+    InterCE2Lanhlr:
+      routes:
+      interfacename: InterCE2Lanhlr
+      networkname: interce2lan-hlr
+    InterCE3Lanhlr:
+      routes:
+      interfacename: InterCE3Lanhlr
+      networkname: interce3lan-hlr
+    sctpTune:
+      interfacename: dummy
+      networkname: sctptuness7
+  nodeSelector:
+  - key: is_edge
+    value: 'true'
+  tolerations:
+  - effect: NoExecute
+    key: is_edge
+    operator: Equal
+    value: 'true'
+  - effect: NoExecute
+    key: node.kubernetes.io/not-ready
+    operator: Exists
+    tolerationSeconds: 0
+  - effect: NoExecute
+    key: node.kubernetes.io/unreachable
+    operator: Exists
+    tolerationSeconds: 0
+  serviceAccountName: ''
+  priorityClassName: ''
+  custom:
+    labels: {}
+  connections:
+  - pod_id: '2'
+    interCE1prim: 10.255.68.145/24
+    interCE2prim: 10.255.68.147/24
+    interCE3prim: 10.255.69.69/24
+    sigplan: 10.255.68.143/24
+    sigslan: 10.255.69.67/24
+  - pod_id: '3'
+    interCE1prim: 10.255.68.146/24
+    interCE2prim: 10.255.68.148/24
+    interCE3prim: 10.255.69.70/24
+    sigplan: 10.255.68.144/24
+    sigslan: 10.255.69.68/24
+  podDisruptionBudgetEnabled: true
+  podDisruptionBudget: 25%
+  maxUnavailable: 25%
+  sctpTune:
+    enabled: false
+  fullnameOverride: ''
+  enableLinkStatusCheck: false
+
+hlrcallp:
+  image:
+    hlrcallp:
+      tag: IMSDL24030133
+  networks:
+    ldapLan:
+      routes:
+      interfacename: ldapLan
+      networkname: ldaplan
+    dgramTune:
+      interfacename: dummy
+      networkname: dgramtunehlrcallp
+  nodeSelector:
+  - key: is_worker
+    value: 'true'
+  tolerations:
+  - effect: NoExecute
+    key: is_worker
+    operator: Equal
+    value: 'true'
+  - effect: NoExecute
+    key: node.kubernetes.io/not-ready
+    operator: Exists
+    tolerationSeconds: 0
+  - effect: NoExecute
+    key: node.kubernetes.io/unreachable
+    operator: Exists
+    tolerationSeconds: 0
+  serviceAccountName: ''
+  priorityClassName: ''
+  custom:
+    labels: {}
+  replicaCount: 1
+  podDisruptionBudgetEnabled: true
+  podDisruptionBudget: 25%
+  maxUnavailable: 25%
+  stackType: 2
+  enableHlrH2p: true
+  dgramTune:
+    enabled: false
+  sccpType: 1
+  hpa:
+    minreplicas: 2
+    maxreplicas:
+    useCpu:
+      enabled: false
+      target: 60
+
+lcm:
+  image:
+    lcmhook:
+      tag: IMSDL24030133
+  nodeSelector:
+  - key: is_edge
+    value: 'true'
+  tolerations:
+  - effect: NoExecute
+    key: is_edge
+    operator: Equal
+    value: 'true'
+  serviceAccountName: ''
+  custom:
+    labels: {}
+  lcmsettings:
+    ztslcmpassword: 'User@1234'
+    ztshooklcmpasswdsecret:
+      enabled: false
+    clustername: zts1
+    SSProvisionInUpgrade: disable
+    preProvisionJob: disable
+    preInstallJob: enable
+    postInstallJob: enable
+    preDeleteJob: enable
+    postDeleteJob: disable
+    preUpgradeJob: enable
+    postUpgradeJob: enable
+    preRollbackJob: enable
+    postRollbackJob: enable
+    preUpgradeProvisionJob: disable
+    preProvision:
+      secretName: <edge-repo-secret-name>
+      relativePathNetconf: /<product_specific_repo>/netconf/<netconf.xml>
+      relativePathSecret: /artifactory-edge-uploads/secret/<secret.json>
+      relativePathTelesyslicense: ''
+      relativePathSS7Link: ''
+      secureProvisionEnabled: false
+    umProvisionPreInstallJob: disable
+    umProvisionPreUpgradeJob: disable
+    umProvisionPostDeleteJob: disable
+    certHandlerJob: disable
+    certs:
+    - enabled: false
+      overwrite: false
+      application: HSSCALLP.LDAP
+      subject: /C=EX/O=Example/CN=example.com
+      subjectAltName: DNS:example.com,IP:1.2.3.4
+      days: 42
+    - enabled: false
+      application: HSSCALLP.SDLDISC
+    - enabled: false
+      application: HLRCALLP.LDAP
+    - enabled: false
+      application: HLRCALLP.Diameter
+    - enabled: false
+      application: HLRCALLP.SDLDISC
+    - enabled: false
+      application: TRIGGER.TriggerSerSoap
+    - enabled: false
+      application: TRIGGER.OLCM
+    - enabled: false
+      application: TRIGGER.MSSearchServ
+    - enabled: false
+      application: TRIGGER.CanMSubServ
+    - enabled: false
+      application: TRIGGER.AcKeyServ
+    - enabled: false
+      application: TRIGGER.EirTriggerSoap
+    - enabled: false
+      application: DLB.Diameter
+    - enabled: false
+      application: ARPF.AcReencrypt
+    - enabled: false
+      application: HSSLI.X2
+    - enabled: false
+      application: HTTP2LB.H2pServ
+    - enabled: false
+      application: HTTP2LB.H2pCli
+    readyCheckJob: disable
+  workerNodeSelector:
+  - key: is_worker
+    value: 'true'
+  workerTolerations:
+  - key: is_worker
+    operator: Equal
+    effect: NoSchedule
+    value: 'true'
+
+vnfclusterenvoylb:
+  networks:
+    vnflbLan:
+      routes:
+      interfacename: vnflbLan
+      networkname: vnflblan
+  nodeSelector:
+  - key: is_edge
+    value: 'true'
+  tolerations:
+  - effect: NoExecute
+    key: is_edge
+    operator: Equal
+    value: 'true'
+  - effect: NoExecute
+    key: node.kubernetes.io/not-ready
+    operator: Exists
+    tolerationSeconds: 0
+  - effect: NoExecute
+    key: node.kubernetes.io/unreachable
+    operator: Exists
+    tolerationSeconds: 0
+  serviceAccountName: ''
+  priorityClassName: ''
+  custom:
+    labels: {}
+  replicaCount: 2
+  podDisruptionBudgetEnabled: true
+  podDisruptionBudget: 25%
+  maxUnavailable: 25%
+
+hssfla:
+  image:
+    hssfla:
+      tag: IMSDL24030133
+  nodeSelector:
+  - key: is_worker
+    value: 'true'
+  tolerations:
+  - effect: NoExecute
+    key: is_worker
+    operator: Equal
+    value: 'true'
+  - effect: NoExecute
+    key: node.kubernetes.io/not-ready
+    operator: Exists
+    tolerationSeconds: 0
+  - effect: NoExecute
+    key: node.kubernetes.io/unreachable
+    operator: Exists
+    tolerationSeconds: 0
+  serviceAccountName: ''
+  priorityClassName: ''
+  custom:
+    labels: {}
+  replicaCount: 1
+  podDisruptionBudgetEnabled: true
+  podDisruptionBudget: 25%
+  maxUnavailable: 25%
+
+clustermonitoragent:
+  image:
+    ztsclustermonitoragent:
+      tag: IMSDL24030133
+    healthcheck:
+      tag: IMSDL24030133
+  nodeSelector:
+  - key: is_worker
+    value: 'true'
+  tolerations:
+  - effect: NoExecute
+    key: is_worker
+    operator: Equal
+    value: 'true'
+  - effect: NoExecute
+    key: node.kubernetes.io/not-ready
+    operator: Exists
+    tolerationSeconds: 0
+  - effect: NoExecute
+    key: node.kubernetes.io/unreachable
+    operator: Exists
+    tolerationSeconds: 0
+  serviceAccountName: ''
+  priorityClassName: ''
+  custom:
+    labels: {}
+  podDisruptionBudgetEnabled: true
+  podDisruptionBudget: 25%
+  ztstrackersettings:
+    ztstrackeruser:
+    ztstrackerpassword:
+    ztstrackersecret:
+  PodVisibleAtNetActOnInstantiation: false
+
+dco:
+  image:
+    dco:
+      tag: IMSDL24030133
+  podDisruptionBudgetEnabled: true
+  podDisruptionBudget: 25%
+  serviceAccountName: ''
+  serviceAccountNameForJob: ''
+  priorityClassName: ''
+  nodeSelector:
+  - key: is_worker
+    value: 'true'
+  tolerations:
+  - effect: NoExecute
+    key: is_worker
+    operator: Equal
+    value: 'true'
+  - effect: NoExecute
+    key: node.kubernetes.io/not-ready
+    operator: Exists
+    tolerationSeconds: 0
+  - effect: NoExecute
+    key: node.kubernetes.io/unreachable
+    operator: Exists
+    tolerationSeconds: 0
+  custom:
+    labels: {}
+
+hssxds:
+  image:
+    hssxds:
+      tag: IMSDL24030133
+  ldapServerDbType: 1
+  podDisruptionBudgetEnabled: true
+  podDisruptionBudget: 25%
+  replicaCount: 2
+  serviceAccountName: ''
+  priorityClassName: ''
+  nodeSelector:
+  - key: is_worker
+    value: 'true'
+  tolerations:
+  - effect: NoExecute
+    key: is_worker
+    operator: Equal
+    value: 'true'
+  - effect: NoExecute
+    key: node.kubernetes.io/not-ready
+    operator: Exists
+    tolerationSeconds: 0
+  - effect: NoExecute
+    key: node.kubernetes.io/unreachable
+    operator: Exists
+    tolerationSeconds: 0
+  custom:
+    labels: {}
+
+tests:
+  image:
+    lcmhook:
+      tag: IMSDL24030133
+  serviceAccountName: ''
+  custom:
+    labels: {}
+
+etcd:
+  service:
+    tolerationsForTaints:
+      tolerations:
+      - effect: NoExecute
+        key: is_worker
+        operator: Equal
+        value: 'true'
+      - effect: NoExecute
+        key: node.kubernetes.io/not-ready
+        operator: Exists
+        tolerationSeconds: 0
+      - effect: NoExecute
+        key: node.kubernetes.io/unreachable
+        operator: Exists
+        tolerationSeconds: 0
+    nodeSelector:
+    - key: is_worker
+      value: 'true'
+    securityContext:
+      runAsUser: 2000
+      fsGroup: 2000
+    PDB:
+      enable: true
+      maxUnavailable: 30%
+    priorityClassName: ''
+  timezone:
+    timeZoneEnv:
+  global:
+    serviceAccountName: ''
+  unifiedLogging:
+    syslog:
+      enabled: false
+      host:
+      tls:
+        secretname: qdlab1cnf-csf-logstream-cert
+  custom:
+    labels: {}
+
+cnsba-controller:
+  global:
+    registry: bcmt-registry:5000
+    time_zone_name: UTC
+    commonLabels: {}
+    podLabels: {}
+  cnsba:
+    enabled: true
+    crdbHost: qdlab1-db-crdb-redisio.default.svc.cluster.local
+    crdbSecret: qdlab1-db-crdb-redisio-creds-default
+  enableNonServiceMeshTLS: false
+  enableNrfCache: true
+  cnsba_nrfc:
+    enabled: true
+    config:
+      csd:
+        dbHostName: qdlab1-db-crdb-redisio
+  fullnameOverride: qdlab1-cnsba-controller
+  egressLbEndpoint: qdlab1-http2lb-svc-egress:10001
+  egressLbEndpointHttps: qdlab1-http2lb-svc-egress:10002
+  serviceAccount: ''
+  cnsba_oam:
+    fullnameOverride: qdlab1-cnsba-oam
+    nodeSelector:
+    - key: is_worker
+      value: 'true'
+    tolerations:
+    - effect: NoExecute
+      key: is_worker
+      operator: Equal
+      value: 'true'
+    - effect: NoExecute
+      key: node.kubernetes.io/not-ready
+      operator: Exists
+      tolerationSeconds: 0
+    - effect: NoExecute
+      key: node.kubernetes.io/unreachable
+      operator: Exists
+      tolerationSeconds: 0
+    pdbEnabled: true
+    podDisruptionBudget: 50%
+    priorityClassName: ''
+  cnsbaSidecar:
+    config:
+      csd:
+        dbHostName: qdlab1-db-crdb-redisio
+  cnsbaConfiguration:
+    config:
+      csd:
+        dbHostName: qdlab1-db-crdb-redisio
+      k8sServiceDiscovery:
+        namespaces: zts
+  security:
+    networkFirewall:
+      enabled: false
+  controllerService:
+    required: true
+    nodeSelector:
+    - key: is_worker
+      value: 'true'
+    tolerations:
+    - effect: NoExecute
+      key: is_worker
+      operator: Equal
+      value: 'true'
+    - effect: NoExecute
+      key: node.kubernetes.io/not-ready
+      operator: Exists
+      tolerationSeconds: 0
+    - effect: NoExecute
+      key: node.kubernetes.io/unreachable
+      operator: Exists
+      tolerationSeconds: 0
+    pdbEnabled: true
+    podDisruptionBudget: 50%
+    priorityClassName: ''
+    config:
+      csd:
+        dbHostName: qdlab1-db-crdb-redisio
+  zts:
+    majorRel: '24'
+    minorRel: '3.0'
+    vnfName: qdlab1
+    ztslIP: qdlab1-vnfclusterenvoylb-svc.hssfire.svc.cluster.local
+    caServiceFQDN: caserverservice.zts.svc.cluster.local
+    ztsSecretKeyRefName: qdlab1casecret
+  sidecar:
+    env:
+      targetIP: qdlab1-vnfclusterenvoylb-svc.hssfire.svc.cluster.local
+    image:
+      registry: bcmt-registry:5000
+  cnsbaMetrics:
+    registry: bcmt-registry:5000
+  alerting:
+    registry: bcmt-registry:5000
+  envoySidecar:
+    registry: bcmt-registry:5000
+  podSecurityContext_config: true
+  customPodSecurityContext:
+    runAsUser: 2000
+    fsGroup: 1099
+  useSecurityPolicyType: opa
+
+crdb-redisio:
+  serviceAccountName: ''
+  timeZone:
+    timeZoneEnv:
+  global:
+    registry: bcmt-registry:5000
+    registry1: bcmt-registry:5000
+    registry2: bcmt-registry:5000
+  tls:
+    enabled: false
+  unifiedLogging:
+    syslog:
+      enabled: false
+      host:
+      closeReqType: GNUTLS_SHUT_RDWR
+      keyStore:
+        secretName: qdlab1cnf-csf-logstream-cert
+      keyStorePassword:
+        secretName: qdlab1cnf-csf-logstream-cert
+      trustStore:
+        secretName: qdlab1cnf-csf-logstream-cert
+      trustStorePassword:
+        secretName: qdlab1cnf-csf-logstream-cert
+  server:
+    nodeSelector:
+    - key: is_worker
+      value: 'true'
+    tolerations:
+    - effect: NoExecute
+      key: is_worker
+      operator: Equal
+      value: 'true'
+    - effect: NoExecute
+      key: node.kubernetes.io/not-ready
+      operator: Exists
+      tolerationSeconds: 0
+    - effect: NoExecute
+      key: node.kubernetes.io/unreachable
+      operator: Exists
+      tolerationSeconds: 0
+    persistence:
+      storageClass: ''
+    pdb:
+      enabled: true
+      maxUnavailable: 30%
+    priorityClassName: ''
+  admin:
+    nodeSelector:
+    - key: is_worker
+      value: 'true'
+    tolerations:
+    - effect: NoExecute
+      key: is_worker
+      operator: Equal
+      value: 'true'
+    - effect: NoExecute
+      key: node.kubernetes.io/not-ready
+      operator: Exists
+      tolerationSeconds: 0
+    - effect: NoExecute
+      key: node.kubernetes.io/unreachable
+      operator: Exists
+      tolerationSeconds: 0
+    persistence:
+      storageClass: ''
+    pdb:
+      enabled: true
+      maxUnavailable: 100%
+    priorityClassName: ''
+  sentinel:
+    nodeSelector:
+    - key: is_worker
+      value: 'true'
+    tolerations:
+    - effect: NoExecute
+      key: is_worker
+      operator: Equal
+      value: 'true'
+    - effect: NoExecute
+      key: node.kubernetes.io/not-ready
+      operator: Exists
+      tolerationSeconds: 0
+    - effect: NoExecute
+      key: node.kubernetes.io/unreachable
+      operator: Exists
+      tolerationSeconds: 0
+    pdb:
+      enabled: true
+      maxUnavailable: 30%
+    priorityClassName: ''
+  nodeAntiAffinity: hard
+  rbac:
+    enabled: true
+  podSecurityContext:
+    fsGroup: 6379
+    runAsUser: 6379
+    disabled: false
+  containerSecurityContext:
+    disabled: false
+  custom:
+    pod:
+      labels: {}
+
+debugassist:
+  replicaCount: 1
+  nodeSelector:
+  - key: is_worker
+    value: 'true'
+  tolerations:
+  - effect: NoExecute
+    key: is_worker
+    operator: Equal
+    value: 'true'
+  - effect: NoExecute
+    key: node.kubernetes.io/not-ready
+    operator: Exists
+    tolerationSeconds: 0
+  - effect: NoExecute
+    key: node.kubernetes.io/unreachable
+    operator: Exists
+    tolerationSeconds: 0
+  customPodSecurityContext:
+    enabled: false
+    userid:
+    fsgroupid:
+  serviceAccountName: ''
+  custom:
+    labels: {}
+

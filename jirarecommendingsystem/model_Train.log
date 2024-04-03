@@ -1,0 +1,5 @@
+03/26/2024 23:08:05 - WARNING - __main__ -  total jira number is:8076
+03/26/2024 23:13:42 - WARNING - __main__ -  dumped JIRA number in dictProjectIssues is:8076
+03/26/2024 23:15:15 - WARNING - __main__ -  Model trained: 1_summary_d2v_0dm_100epoch_50vecsize_0.025alpha.model
+03/26/2024 23:17:31 - WARNING - __main__ -  Model trained: 1_summary_d2v_1dm_100epoch_50vecsize_0.025alpha.model
+03/26/2024 23:25:43 - WARNING - __main__ -  Model trained: 1_summary_d2v_0dm_500epoch_50vecsize_0.025alpha.model

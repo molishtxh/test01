@@ -1,0 +1,33 @@
+<edit-config>
+  <target>
+    <running/>
+  </target>
+  <config>
+    <sdl xmlns="http://nokia.com/sdl">
+  <config>
+    <global-config>
+<application-profiles>
+<profile operation="create">
+  <client>HSS</client>
+  <service-type>storage</service-type>
+  <protocol>ldap_onends</protocol>
+  <tps>1000</tps>
+  <num-local-endpoints>2</num-local-endpoints>
+  <num-remote-endpoints>2</num-remote-endpoints>
+  <ttl>120</ttl>
+</profile>
+<profile operation="create">
+  <client>PGW</client>
+  <service-type>storage</service-type>
+  <protocol>ldap_onends</protocol>
+  <tps>2000</tps>
+  <num-local-endpoints>1</num-local-endpoints>
+  <num-remote-endpoints>0</num-remote-endpoints>
+  <ttl>0</ttl>
+</profile>
+</application-profiles>
+    </global-config>
+  </config>
+  </sdl>
+  </config>
+</edit-config>

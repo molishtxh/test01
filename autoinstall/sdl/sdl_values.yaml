@@ -1,0 +1,207 @@
+global:
+  user_password: QN%Sn8jn
+  user_password_base64: UU4lU244am4K
+  zts_ns: zts-default
+  zts1user_sercet: User@1234
+  zts_admin_passwd: Admin@1234
+  zts_envoy_ip1: 10.93.98.129
+  zts_envoy_ip2: 10.93.98.130
+  ztslfs_tag: 1.14.14-276
+  sdl_ip: 10.93.98.129
+  sdl_ns: sdl-cet
+  sdl_package_path: /root/sunj/sdl/scripts/cnfDeployment/
+  sdl_install_path: /root/jiangjil/SDL_2250.0.2030/INSTALL_MEDIA/CHARTS/
+  pgw_install_path: /root/jiangjil/PGW_2250.0.1368/INSTALL_MEDIA/CHARTS/
+  sdl_crd_path: /root/jiangjil/SDL_2250.0.2030/INSTALL_MEDIA/MISC/charts-values-examples/vip-crd/
+  pgw_crd_path: /root/jiangjil/PGW_2250.0.1368/INSTALL_MEDIA/MISC/charts-values-examples/vip-crd/scenario2/
+  sdl_ss_pkg_path: /root/jiangjil/SDL_2250.0.2030/INSTALL_MEDIA/MISC/zts_ss
+  sdl_loadNum: SDL_2250.0.2030
+  sdl_persistence_config: small
+  sdl_resource_smallconfig_Enabled: true
+  sdl_tag: 2250.0.2031
+  pgw_tag: 2250.0.2031
+  sdl_dockerTag: 2250.0.2031
+  sdl_storageClass: glusterfs-storageclass
+  sdl_repository_prefix: nokia/sdl/
+  sdl_sanfqdn1: oam.myos.com
+  sdl_sanfqdn2: app.myos.com
+  sdl_vnfid: sdlcet
+  pgw_vnfid: pgwcet
+  pgw_ns: sdl-cet
+  pgw_package_path: /root/jiangjil/SDL_2250.0.2030
+  pgw_ss_pkg_path: /root/reed/PGW_2250.0.1368/INSTALL_MEDIA/MISC/zts_ss
+  ncm_admin_user: ncm_admin
+  ncm_admin_pwd: yt_xk39B
+  control_ip: 10.91.64.151
+  control_user: root
+  control_pwd: r00t
+  diag_pod_prefix: diag
+  sdl_citm_ext_oam: 1.1.1.1
+  sdl_netconf_user: oes
+  sdl_netconf_pwd: QN%Sn8jn 
+  bcmt_port: 8082
+  exps_to_be_installed_path: exps_to_be_installed
+  aep_package_path: /root/reed/exps_to_be_installed
+  testclient_ip: 10.67.34.200
+  testclient_user: jiangjil
+  testclient_pwd: jiangjil
+  aep_package_path_lpc: /home/jiangjil/cnfsdl/test
+  exps_sequence: common pgw 3GPPHSS HLR HSSIMS HSSEPS UDM5G LI3GPPHSS
+  operate_list: load-exp prepare-exp activate-exp 
+  pgwops_user: cmuser
+  pgwops_pwd: QN%Sn8jn
+  pgwops: 10.1.1.99
+  pgw_pwd: QN%Sn8jn
+  pgw: 10.1.1.99
+
+
+infracommon:
+  global:
+    multicnf: true
+    cnfName: sdlcet
+    issyncenabled: 'no'
+    isbqrenabled: 'no'
+  common:
+    ntfdefault_kafka_releasename: sdl1-kafka-ntf
+    ntfbqr_kafka_releasename: sdl1-kafka-bqr
+    ntfsync_kafka_releasename: sdl1-kafka-sync
+    domain_name: cluster.local
+    hostnameprefix: sdl1
+    flavor_type: small
+    revenueAssurance: true
+    zts_ca_endpoints:
+      zts1:
+        fqdn_um: umserver-service-zts1.service.dc1.zts-default.svc.cluster.local,umserver-service-zts1.service.dc1.zts-default.svc.cluster.ha
+        secret_user: enRzMXp0c3NlY3JldA==
+        secret_pass: aGNweEV0aTRsVg==
+    ztslfs:
+      config:
+        targetZts: zts1
+    ztsfm:
+      config:
+        targetZts: zts1
+    zts_ss:
+      config:
+        vnfId: sdlcet
+        neType: SDL
+        encryption_key: UKpmacgNMyjOdKDMq7k5i8xXaayX1hjq
+  networks:
+    ext_oam_network:
+      host_device: eth3
+      ipv4:
+        subnets:
+          subnet: 10.32.192.0/20
+          allocation_pool:
+            start: 10.32.200.136
+            end: 10.32.200.143
+          routes:
+          - destination: 10.32.192.0/22
+            gateway: 10.32.192.2
+    ext_app_network:
+      host_device: eth4
+      ipv4:
+        subnets:
+          subnet: 10.10.176.0/20
+          allocation_pool:
+            start: 10.10.184.132
+            end: 10.10.184.139
+          routes:
+          - destination: 10.10.176.0/20
+            gateway: 10.10.176.1
+    int_db_network:
+      host_device: eth2
+      ipv4:
+        subnets:
+          subnet: 10.93.96.0/20
+          allocation_pool:
+            start: 10.93.98.131
+            end: 10.93.98.138
+          routes:
+          - destination: 10.93.96.0/20
+            gateway: 10.93.96.1
+    ext_db_network:
+      host_device: eth1
+      name: ext-db-lan
+      method: static
+      ipv4:
+        subnets:
+          subnet: 10.93.128.0/20
+          allocation_pool:
+            start: 10.93.136.214
+            end: 10.93.136.221
+          routes:
+          - destination: 10.93.128.0/20
+            gateway: 10.93.128.128
+
+dbstorage:
+  dbstorage:
+    persistence:
+      smallconfig:
+        journalsize: 15Gi
+
+oes:
+  oes:
+    persistence:
+      storageClass: vsphere
+
+diag:
+  diag:
+    persistence:
+      storageClassRwx: glusterfs-storageclass
+      smallconfig:
+        storagesize: 20Gi
+        kafkasize: 20Gi
+        journalsize: 20Gi
+        distributedStorageSize: 5Gi
+        cburatmpbackupsize: 10Gi
+    sdlPostDeployHook:
+      repository: nokia/sdl/sdl-hook
+    cbur:
+      cronJob: '*/60 * * * *'
+    sdlsec:
+      image:
+        repository: nokia/sdl/sdl-sec
+  ztslfs:
+    image:
+      repository: nokia/sdl/lfsclient
+  ztsfm:
+    image:
+      repository: nokia/sdl/tsa
+
+psp:
+  global:
+    PodSecurityPolicy:
+      pspname: sdlcet-psp
+
+clustermonitoragent:
+  global:
+    imageRegistry: bcmt-registry:5000/nokia/sdl
+    vnfname: sdlcet
+
+citm-ingress:
+  controller:
+    disableIvp6: true
+    scope:
+      namespace: sdl-cet
+    nodeSelector:
+      lb_sdl_citm_nc2748: 'true'
+
+CHARTS/citm-ingress/values_extapp.yaml:
+  controller:
+    bindAddress: 10.10.184.139
+    replicaCount: 1
+  nodeSelector:
+    lb_citm_app: 'true'
+
+CHARTS/citm-ingress/values_extdb.yaml:
+  controller:
+    bindAddress: 10.93.136.221
+    replicaCount: 1
+  nodeSelector:
+    lb_citm_db: 'true'
+
+CHARTS/citm-ingress/values_extoam.yaml:
+  controller:
+    bindAddress: 10.32.200.143
+    replicaCount: 1
+

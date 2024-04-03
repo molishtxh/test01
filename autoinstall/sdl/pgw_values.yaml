@@ -1,0 +1,294 @@
+global:
+  pgw_vnfid: pgwcet
+  pgw_ns: sdl-cet
+  pgw_package_path: /root/cnf_sdl_autotool/
+  pgw_ss_pkg_path: /root/reed/PGW_2250.0.1368/INSTALL_MEDIA/MISC/zts_ss
+  pgw_loadNum: PGW_2250.0.1368
+  pgwops_user: cmuser
+  pgwops_pwd: QN%Sn8jn
+  pgwops: 10.1.1.99
+  pgw_pwd: QN%Sn8jn
+  pgw: 10.1.1.99
+  primaryInterface: eth3
+  networks:
+    extoam1_network:
+      host_device: eth3
+      ipv4:
+        subnets:
+          subnet: 10.32.192.0/20
+          address: 10.32.200.145
+          routes:
+          - destination: 10.32.192.0/20
+            gateway: 10.32.192.1
+    extoam2_network:
+      host_device: eth3
+      ipv4:
+        subnets:
+          subnet: 10.32.192.0/20
+          address: 10.32.200.146
+          routes:
+          - destination: 10.32.192.0/20
+            gateway: 10.32.192.1
+    extoam4_network:
+      host_device: eth3
+      ipv4:
+        subnets:
+          subnet: 10.32.192.0/20
+          address: 10.32.200.147
+          routes:
+          - destination: 10.32.192.0/20
+            gateway: 10.32.192.1
+    extapp3_network:
+      host_device: eth4
+      ipv4:
+        subnets:
+          subnet: 10.10.176.0/20
+          address: 10.10.184.141
+          routes:
+          - destination: 10.10.176.0/20
+            gateway: 10.10.176.1
+    extprov1_network:
+      host_device: eth1
+      ipv4:
+        subnets:
+          subnet: 10.93.128.0/20
+          address: 10.93.136.223
+          routes:
+          - destination: 10.93.128.0/20
+            gateway: 10.93.128.1
+    extprov2_network:
+      host_device: eth1
+      ipv4:
+        subnets:
+          subnet: 10.93.128.0/20
+          address: 10.93.136.224
+          routes:
+          - destination: 10.93.128.0/20
+            gateway: 10.93.128.1
+
+infracommon:
+  global:
+    cnfName: pgwcet
+    citmenabled: "yes"
+    shutdown_type: "UNGRACEFUL"
+  common:
+    hostnameprefix: pgw1
+    pgwadmin_passwd: UU4lU244am4K
+    liadmin_passwd: UU4lU244am4K
+    root_passwd: UU4lU244am4K
+    users:
+      boot_pass: UU4lU244am4K
+      vnfmapiuser_pass: UU4lU244am4K
+      hacluster_pass: UU4lU244am4K
+      bulk_sftp_default_pass: UU4lU244am4K
+      li_sftp_default_pass: UU4lU244am4K
+      vnfm_pass: UU4lU244am4K
+      cmuser_pass: UU4lU244am4K
+      liconfiguser_pass: UU4lU244am4K
+      cassandra_pass: UU4lU244am4K
+      pgwadminuser_pass: UU4lU244am4K
+      PGW_pass: UU4lU244am4K
+    hook:
+      repository: nokia/pgw/hook
+      tag: "14062022121110"
+    pgwops:
+      locality: locality0
+      pgw_instance: B
+    pgw:
+      globalSettings_pgwSiteId: locality0
+      globalSettings_preferredSiteOrder: locality0
+      globalSettings_sdlDiscoveryIPs[0]: 
+        - 10.10.184.139
+    keys:
+      m2mops_public: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDC5Yue9yPHhfGuXfHK3h2dmV3wZ9/Lsb284+fjDTEp/I+5+uAVopVy3ccbcqosrEJFceE37O47AEl89B1ReEwvkHNITObe1IdggRyn+Uin0KJZ9N198dh2Y//1VfiPCHwN4vdtLLQNiObymqhDT72/HJiAG+fcjnpNeCdRKrqdedakpjq1w3dlxAeYEYgXX85+s52TJw5mimTXfJLcXHpxxOR6PQlZ97vrMFbQ8W8duFI2pXrz3Ic1CgZnw7K8Rtb25RLqqaPyLFYP1mYmpoOdrDyPexPww3Le3WxGycW9ltj7W6XPa/RqVgkmGQyq02d6oXCio6P8S0GijVTOJzCBroot@nc2748node02
+      provgw_public: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDC5Yue9yPHhfGuXfHK3h2dmV3wZ9/Lsb284+fjDTEp/I+5+uAVopVy3ccbcqosrEJFceE37O47AEl89B1ReEwvkHNITObe1IdggRyn+Uin0KJZ9N198dh2Y//1VfiPCHwN4vdtLLQNiObymqhDT72/HJiAG+fcjnpNeCdRKrqdedakpjq1w3dlxAeYEYgXX85+s52TJw5mimTXfJLcXHpxxOR6PQlZ97vrMFbQ8W8duFI2pXrz3Ic1CgZnw7K8Rtb25RLqqaPyLFYP1mYmpoOdrDyPexPww3Le3WxGycW9ltj7W6XPa/RqVgkmGQyq02d6oXCio6P8S0GijVTOJzCBroot@nc2748node02
+      logging_public: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDC5Yue9yPHhfGuXfHK3h2dmV3wZ9/Lsb284+fjDTEp/I+5+uAVopVy3ccbcqosrEJFceE37O47AEl89B1ReEwvkHNITObe1IdggRyn+Uin0KJZ9N198dh2Y//1VfiPCHwN4vdtLLQNiObymqhDT72/HJiAG+fcjnpNeCdRKrqdedakpjq1w3dlxAeYEYgXX85+s52TJw5mimTXfJLcXHpxxOR6PQlZ97vrMFbQ8W8duFI2pXrz3Ic1CgZnw7K8Rtb25RLqqaPyLFYP1mYmpoOdrDyPexPww3Le3WxGycW9ltj7W6XPa/RqVgkmGQyq02d6oXCio6P8S0GijVTOJzCBroot@nc2748node02
+      pgwm2mext_public: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDC5Yue9yPHhfGuXfHK3h2dmV3wZ9/Lsb284+fjDTEp/I+5+uAVopVy3ccbcqosrEJFceE37O47AEl89B1ReEwvkHNITObe1IdggRyn+Uin0KJZ9N198dh2Y//1VfiPCHwN4vdtLLQNiObymqhDT72/HJiAG+fcjnpNeCdRKrqdedakpjq1w3dlxAeYEYgXX85+s52TJw5mimTXfJLcXHpxxOR6PQlZ97vrMFbQ8W8duFI2pXrz3Ic1CgZnw7K8Rtb25RLqqaPyLFYP1mYmpoOdrDyPexPww3Le3WxGycW9ltj7W6XPa/RqVgkmGQyq02d6oXCio6P8S0GijVTOJzCBroot@nc2748node02
+    zts_ca_endpoints:
+      zts1:
+        ip: 10.93.98.129,10.93.98.130
+        fqdn_um: umserver-service-zts1.service.dc1.zts-default.svc.cluster.local,umserver-service-zts1.service.dc1.zts-default.svc.cluster.ha
+        secret_user: enRzMXp0c3NlY3JldA==
+        secret_pass: aGNweEV0aTRsVg==
+    zts_ss:
+      config:
+        vnfId: pgwcet
+        neType: PGW
+        encryption_key: UKpmacgNMyjOdKDMq7k5i8xXaayX1hjq
+
+CHARTS/citm-ingress/values.yaml:
+  controller:
+    disableIvp6: true
+    scope:
+      namespace: "pgw-cet"
+
+CHARTS/clustermonitoragent/values.yaml:
+  global:
+    imageRegistry: bcmt-registry:5000/nokia/sdl
+    vnfname: pgwcet
+    ZTSENTRYPOINT: "10.93.98.129"
+    ZTSLB1IP: "10.93.98.129"
+    ZTSLB2IP: "10.93.98.130"
+
+CHARTS/pgw/values.yaml:
+  hook:
+    repository: nokia/pgw/hook
+    tag: "14062022121110"
+  pgw:
+    encryption_type: "RSA"
+    storageClass: vsphere
+    image:
+      repository: nokia/pgw/pgwcore
+      tag: 2250.0.1368
+    smallconfig:
+      Enabled: true
+      resources:
+        requests:
+          memory: 3Gi
+    sdlsec:
+      image:
+        repository: nokia/pgw/sdl-sec
+        tag: 2250.0.1368
+      smallconfig:
+        Enabled: True
+  ztslfs:
+    image:
+      tag: 1.14.14-275
+  ztsfm:
+    image:
+      repository: nokia/pgw/tsa
+      tag: 2250.0.1368
+
+CHARTS/pgwbulk/values.yaml:
+  pgwbulk:
+    hostnameprefix: pgw1
+    tolerations:
+    - effect: NoExecute
+      key: is_edge
+      operator: Equal
+      value: 'true'
+    persistence:
+      config: small
+      smallconfig:
+        pgwbulksrvsize: 15Gi
+        umbackupsize: 800Mi
+    image:
+      repository: nokia/pgw/pgwbulk
+      tag: 2250.0.1368
+    smallconfig:
+      Enabled: true
+    sdlsec:
+      image:
+        repository: nokia/pgw/sdl-sec
+        tag: 2250.0.1368
+      smallConfig:
+        Enabled: True
+  ztslfs:
+    image:
+      tag: 1.14.14-275
+  ztsfm:
+    image:
+      repository: nokia/pgw/tsa
+      tag: 2250.0.1368
+
+CHARTS/pgwcas/values.yaml:
+  hook:
+    repository: nokia/pgw/hook
+    tag: "14062022121110"
+  pgwcas:
+    encryption_type: "RSA"
+    persistence:
+      storageClass: vsphere
+    image:
+      repository: nokia/pgw/pgwcas
+      tag: 2250.0.1368
+    globalSettings_preferredSiteOrder: locality0
+    pgwcas:
+      locality: locality0
+      pgw_instance: B
+      discovery_profile:
+        locality: locality0
+    smallconfig:
+      Enabled: true
+    smallconfig:
+      resources:
+        requests:
+          memory: 2Gi
+    sdlsec:
+      image:
+        repository: nokia/pgw/sdl-sec
+        tag: 2250.0.1368
+      smallConfig:
+        Enabled: True
+  ztslfs:
+    image:
+      tag: 1.14.14-275
+  ztsfm:
+    image:
+      repository: nokia/pgw/tsa
+      tag: 2250.0.1368
+
+CHARTS/pgwoes/values.yaml:
+  global:
+    ztslcmpassword: VXNlckAxMjM0Cg==
+    ztsentrypoint: 10.93.98.129
+    ztsnamespace: zts-default
+  ztshook:
+    initimage:
+      name: nokia/pgw/ztshook
+      dockerTag: ztshooktag
+    image:
+      name: nokia/pgw/ztshook
+      dockerTag: ztshooktag
+    preprovisioningimage:
+      name: nokia/pgw/ztshook
+      dockerTag: ztshooktag
+  pgwoes:
+    persistence:
+      config: small
+      storageClass: vsphere
+    image:
+      repository: nokia/pgw/pgwoes
+      tag: 2250.0.1368
+    globalSettings_preferredSiteOrder: locality0
+    pgwoes:
+      locality: locality0
+      pgw_instance: B
+      discovery_profile:
+        locality: locality0
+    smallconfig:
+      Enabled: true
+    sdlsec:
+      image:
+        repository: nokia/pgw/sdl-sec
+        tag: 2250.0.1368
+      smallConfig:
+        Enabled: True
+  ztslfs:
+    image:
+      tag: 1.14.14-275
+  ztsfm:
+    image:
+      repository: nokia/pgw/tsa
+      tag: 2250.0.1368
+
+CHARTS/psp/values.yaml:
+  PodSecurityPolicy:
+    pspname: pgw-psp
+
+CHARTS/citm-ingress/values_instance1.yaml:
+  controller:
+    bindAddress: "10.32.200.145, 10.93.136.223"
+
+CHARTS/citm-ingress/values_instance2.yaml:
+  controller:
+    bindAddress: "10.32.200.146, 10.93.136.224"
+
+CHARTS/citm-ingress/values_instance3.yaml:
+  controller:
+    bindAddress: "10.10.184.141"
+
+CHARTS/citm-ingress/values_instance4.yaml:
+  controller:
+    bindAddress: "10.32.200.147"
+
